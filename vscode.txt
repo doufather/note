@@ -1,0 +1,106 @@
+# 常用设置
+{
+    "editor.fontSize": 16,
+    "php.validate.executablePath": "D:/PHP/php-7.1.5-nts-Win32-VC14-x64/php.exe",
+    "files.autoSave": "off",
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "workbench.colorTheme": "One Dark Pro",
+    "window.menuBarVisibility": "default",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+    "terminal.explorerKind": "external",
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+    "editor.minimap.enabled": true,
+    "explorer.confirmDelete": false,
+    "window.zoomLevel": 0,
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "window.titleBarStyle": "custom"
+}
+
+# 快捷键
+[
+    {
+        "key": "ctrl+d",
+        "command": "editor.action.deleteLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "editor.action.format",
+        "when": "editorHasFormattingProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+alt+down",
+        "command": "editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "cursorUndo",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "-cursorUndo",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+1",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+oem_period",
+        "command": "-editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+oem_2",
+        "command": "editor.action.triggerSuggest",
+        "when": "editorHasCompletionItemProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+space",
+        "command": "-editor.action.triggerSuggest",
+        "when": "editorHasCompletionItemProvider && editorTextFocus && !editorReadonly"
+    }
+]
+
+# 代码片段
+"Print to console": {
+		"prefix": "clg",
+		"body": [
+			"console.log('$1')"
+		],
+		"description": "Log output to console"
+	},
+	"antd class": {
+		"prefix": "antc",
+		"body": [
+			"import React from 'react';",
+			"import PropTypes from 'prop-types';",
+			"import { Button } from 'antd';",
+			"",
+			"class $1 extends React.PureComponent {",
+			"",
+			"  render() {",
+			"",
+			"    return (",
+			"    )",
+			"  }",
+			"}",
+			"",
+			"$1.propTypes = {",
+			"}",
+			"export default $1;"
+		],
+		"description": "antd class"
+	},
+	"antd func": {
+		"prefix": "antf",
+		"body": [
+			"console.log('$1')"
+		],
+		"description": "antd func"
+	}

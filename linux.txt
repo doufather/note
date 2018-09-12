@@ -1,0 +1,96 @@
+# git
+apt install git
+git config --global core.autocrlf false
+[credential]
+     helper = store
+
+# 合并到master
+git checkout dev
+git pull origin dev
+git checkout release
+git pull origin release
+git checkout master
+git pull origin master
+git merge release
+git push origin master
+git checkout dev
+
+# 提交到dev和release
+git pull origin dev
+git add ./
+git commit -m path
+git push origin dev
+git checkout release
+git pull origin release
+git merge dev
+git push origin release
+git checkout dev
+
+# nginx
+apt install nginx
+vi /etc/nginx/sites-available/default
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /home/lee/WorkSpace/PHP;
+
+	# Add index.php to the list if you are using PHP
+	index index.php index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location /youzhu/ {
+ 		if (!-e $request_filename){
+          		rewrite ^/youzhu/(.*)$ /youzhu/index.php/$1 last;
+			break;
+     		}
+	}
+
+	location / {
+		try_files $uri $uri/ =404;
+ 		if (!-e $request_filename){
+          		rewrite ^/(.*)$ /index.php/$1 last;
+			break;
+     		}
+	}
+
+	location ~ /*.php {
+		include snippets/fastcgi-php.conf;
+
+	#	# With php7.0-cgi alone:
+	#	fastcgi_pass 127.0.0.1:9000;
+	#	# With php7.0-fpm:
+		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+		#fastcgi_index index.php;
+		#fastcgi_intercept_errors     on;
+		#include     fastcgi_params;
+	}
+}
+
+# php
+apt install php-fpm php-curl php-mbstring php-mysqli php-pear php-dev
+pecl install xdebug
+pecl install redis
+
+[redis]
+extension=redis.so
+[xdebug]
+zend_extension=/usr/lib/php/20151012/xdebug.so
+;允许远程IDE调试
+xdebug.remote_enable        = true
+;远程主机
+xdebug.remote_host          = 127.0.0.1
+xdebug.remote_port          = 9000 ;默认端口 9000
+
+# profile
+export M2_HOME=/opt/apache-maven-3.5.4
+export JAVA_HOME=/opt/jdk1.8.0_171
+export NODE_HOME=/opt/node-v8.11.3-linux-x64
+export PATH=$PATH:$M2_HOME/bin:$JAVA_HOME/bin:$NODE_HOME/bin
+
+# keytool
+keytool -genkeypair -alias lianwu-jwt -validity 3650 -keyalg RSA -dname "CN=jwt OU=jwt O=jwt L=zurich S-zurich C=CH" -keypass lee111 -keystore lianwu-jwt.jks -storepass lee111
+
+keytool -list -rfc -keystore lianwu-jwt.jks -storepass lee111 | openssl x509 -inform pem -pubkey

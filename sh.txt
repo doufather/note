@@ -1,0 +1,18 @@
+## kill process
+
+#!/bin/bash
+source /etc/profile
+cd crm-service
+mvn install
+cp -f target/crm-service-1.0.jar /opt/ms/jars/crm/app
+
+ID=`ps -ef | grep "crm-service-1.0.jar" | grep -v "grep" | awk '{print $2}'`
+for id in $ID
+do
+	kill -9 $id
+	echo "killed $id"
+done
+cd /opt/ms/jars/crm/app
+echo "restart jar"
+BUILD_ID=dontKillMe nohup java -jar crm-service-1.0.jar >/dev/null & 2>&1 &
+echo "over----------"

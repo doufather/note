@@ -1,0 +1,4 @@
+# 新建用户
+create user admin@'%' identified by '111111'
+grant all privileges on *.* to admin;
+flush privileges;
