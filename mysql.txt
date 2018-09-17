@@ -1,4 +1,44 @@
 # 新建用户
 create user admin@'%' identified by '111111'
 grant all privileges on *.* to admin;
+grant select on *.* to admin; //创建只读用户
 flush privileges;
+
+# 读写分离
+docker run --name mysql57-master -v /opt/docker_volumes/mysql57data/master:/var/lib/mysql -v /opt/docker_volumes/mysql57data/master.cnf:/etc/mysql/my.cnf -e MYSQL_ROOT_PASSWORD=123456 -d -p 3307:3306 mysql:5.7
+docker run --name mysql57-slave1 -v /opt/docker_volumes/mysql57data/slave1:/var/lib/mysql -v /opt/docker_volumes/mysql57data/slave1.cnf:/etc/mysql/my.cnf -e MYSQL_ROOT_PASSWORD=123456 -d -p 3308:3306 mysql:5.7
+
+# master.cnf
+[mysqld]
+server_id = 1
+log-bin= mysql-bin
+read-only=0
+
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mysql.conf.d/
+
+# slave.cnf
+[mysqld]
+server_id = 2
+log-bin= mysql-bin
+read-only=1
+
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mysql.conf.d/
+
+create user repl;
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%' IDENTIFIED BY '123456';
+
+show master status\G;
+
+change master to master_host='192.168.31.37',
+master_port=3307,
+master_user='repl',
+master_password='123456', 
+master_log_file='mysql-bin.000003',
+master_log_pos=0;
+
+start slave;
+
+show slave status\G;
+
