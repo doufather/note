@@ -16,3 +16,9 @@ cd /opt/ms/jars/crm/app
 echo "restart jar"
 BUILD_ID=dontKillMe nohup java -jar crm-service-1.0.jar >/dev/null & 2>&1 &
 echo "over----------"
+
+
+# keytool
+keytool -genkeypair -alias lianwu-jwt -validity 3650 -keyalg RSA -dname "CN=jwt OU=jwt O=jwt L=zurich S-zurich C=CH" -keypass lee111 -keystore lianwu-jwt.jks -storepass lee111
+
+keytool -list -rfc -keystore lianwu-jwt.jks -storepass lee111 | openssl x509 -inform pem -pubkey
