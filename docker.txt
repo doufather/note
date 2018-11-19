@@ -3,7 +3,8 @@ docker cp /etc/localtime [containerId]:/etc/localtime
 # mysql
 docker pull hub.c.163.com/library/mysql:5.7.18
 docker pull mysql:5.7.18
-docker run --name mysql57 -v /opt/docker_volumes/mysql57:/var/lib/mysql -e TZ=Asis/Shanghai -e MYSQL_ROOT_PASSWORD=123456 -d -p 3306:3306 mysql:5.7.18
+docker run --name mysql57 -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /opt/docker_volumes/mysql57:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d -p 3308:3306 mysql:5.7.18
+
 
 # jenkins
 docker pull jenkins/jenkins:lts
@@ -12,3 +13,16 @@ docker run -d --name jenkins -p 8099:8080 -p 50000:50000 -v /opt/docker_volumes/
 # rabbitmq
 docker pull rabbitmq:management
 docker run -d --name rabbitmq -p 5672:5672 -p 15673:15672 rabbitmq:management
+
+# nginx php
+docker pull php:7.2-fpm-alpine
+docker pull nginx:1.14.1-alpine
+
+docker build -t dunp:1 .
+docker run --name www1 -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /opt/app/www:/var/www/html -d -p 81:80 dunp:1
+docker run --name www2 -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /opt/app/www:/var/www/html -d -p 82:80 dunp:1
+docker exec -it 88 /bin/bash
+
+#redis
+docer pull redis:5-alpine
+docker run --name redis5 -v /opt/docker_volumes/redis/redis.conf:/usr/local/etc/redis/redis.conf -d -p 6379:6379 redis:5-alpine redis-server /usr/local/etc/redis/redis.conf
