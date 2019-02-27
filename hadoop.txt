@@ -1,0 +1,67 @@
+# 单机/伪分布式安装
+# 创建用户，并分配sudo权限
+sudo useradd -m hadoop -s /bin/bash
+sudo passwd hadoop
+sudo adduser hadoop sudo
+# 免密登录
+cd ~/.ssh/                     # 若没有该目录，请先执行一次ssh localhost
+ssh-keygen -t rsa              # 会有提示，都按回车就可以
+cat ./id_rsa.pub >> ./authorized_keys  # 加入授权
+
+ssh-copy-id hostname   # 将公钥发送到相应主机，实现免密登录
+
+# 分布式安装
+# 安装步骤
+
+# 0) 创建hadoop用户
+sudo useradd -m hadoop -s /bin/bash
+sudo passwd hadoop
+sudo adduser hadoop sudo
+# 1) ip, 主机名配置和映射 /etc/hosts /etc/hostname
+# 2) 关闭防火墙和selinux(centos only)
+# 3) 将系统启动级别改为3(即多用户模式，centos only)
+# 4) 配置免密登录
+cd ~/.ssh/                     # 若没有该目录，请先执行一次ssh localhost
+ssh-keygen -t rsa              # 会有提示，都按回车就可以
+ssh-copy-id hostname   # 将公钥发送到相应主机，实现免密登录
+# 5) 安装jdk
+# 6) 时间同步
+apt install ntp
+ntpdate ntp1.aliyun.com
+
+
+
+cd /usr/local/hadoop
+./bin/hadoop version
+
+#core-site.xml
+<configuration>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>file:/usr/local/hadoop/tmp</value>
+        <description>Abase for other temporary directories.</description>
+    </property>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>
+
+#hdfs-site.xml
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:/usr/local/hadoop/tmp/dfs/name</value>
+    </property>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:/usr/local/hadoop/tmp/dfs/data</value>
+    </property>
+</configuration>
+
+./bin/hdfs namenode -format # 格式化NameNode
+./sbin/start-dfs.sh # 开启 NameNode 和 DataNode 守护进程
