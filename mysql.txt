@@ -42,3 +42,6 @@ start slave;
 
 show slave status\G;
 
+# 数据备份与恢复
+mysqldump -usw-rj-code -psw-rj-code_mysql_admin sw-rj > /opt/rj.dump
+mysql -uroot -h127.0.0.1 -p123456 -P3321 sw-rj < /opt/rj.dump

@@ -28,6 +28,8 @@ ssh-copy-id hostname   # 将公钥发送到相应主机，实现免密登录
 # 6) 时间同步
 apt install ntp
 ntpdate ntp1.aliyun.com
+# 7) 安装hadoop,并配置相关文件
+    a) /usr/local/jdk1.8.0_201 .../etc/hadoop/hadoop-env.sh
 
 
 

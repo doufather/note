@@ -19,8 +19,8 @@ docker pull php:7.2-fpm-alpine
 docker pull nginx:1.14.1-alpine
 
 docker build -t dunp:1 .
-docker run --name www1 -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /opt/app/www:/var/www/html -d -p 81:80 dunp:1
-docker run --name www2 -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /opt/app/www:/var/www/html -d -p 82:80 dunp:1
+docker run --name rjw1 -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /var/www/rjw1:/var/www/html -v /var/www/uploads:/var/www/uploads -d -p 81:80 dunp:1
+docker run --name rjw2 -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /var/www/rjw2:/var/www/html -v /var/www/uploads:/var/www/uploads -d -p 82:80 dunp:1
 docker exec -it 88 /bin/bash
 
 #redis
