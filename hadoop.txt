@@ -28,42 +28,13 @@ ssh-copy-id hostname   # 将公钥发送到相应主机，实现免密登录
 # 6) 时间同步
 apt install ntp
 ntpdate ntp1.aliyun.com
-# 7) 安装hadoop,并配置相关文件
-    a) /usr/local/jdk1.8.0_201 .../etc/hadoop/hadoop-env.sh
-
-
-
-cd /usr/local/hadoop
-./bin/hadoop version
-
-#core-site.xml
-<configuration>
-    <property>
-        <name>hadoop.tmp.dir</name>
-        <value>file:/usr/local/hadoop/tmp</value>
-        <description>Abase for other temporary directories.</description>
-    </property>
-    <property>
-        <name>fs.defaultFS</name>
-        <value>hdfs://localhost:9000</value>
-    </property>
-</configuration>
-
-#hdfs-site.xml
-<configuration>
-    <property>
-        <name>dfs.replication</name>
-        <value>1</value>
-    </property>
-    <property>
-        <name>dfs.namenode.name.dir</name>
-        <value>file:/usr/local/hadoop/tmp/dfs/name</value>
-    </property>
-    <property>
-        <name>dfs.datanode.data.dir</name>
-        <value>file:/usr/local/hadoop/tmp/dfs/data</value>
-    </property>
-</configuration>
-
-./bin/hdfs namenode -format # 格式化NameNode
-./sbin/start-dfs.sh # 开启 NameNode 和 DataNode 守护进程
+# 7) 安装hadoop,并配置相关文件(加hadoop文件夹)
+# 8) 远程发送到其他主机
+# 9) 执行格式化（主节点）
+hadoop namenode -format
+# 10) 启动(任意节点)
+start-dfs.sh
+start-yarn.sh
+# 11) 网页查看
+http://master:50070 (hdfs)
+http://master:8088  (yarn)
