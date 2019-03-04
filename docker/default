@@ -1,0 +1,33 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	# Add index.php to the list if you are using PHP
+	index index.php index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location /rjw/ {
+ 		if (!-e $request_filename){
+          	rewrite ^/rjw/(.*)$ /rjw/index.php/$1 last;
+			break;
+     	}
+	}
+
+	location / {
+ 		if (!-e $request_filename){
+          	rewrite ^/(.*)$ /index.php/$1 last;
+			break;
+     	}
+	}
+
+	location ~ /*.php {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+		#fastcgi_index index.php;
+		#fastcgi_intercept_errors     on;
+		#include     fastcgi_params;
+	}
+}
