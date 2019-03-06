@@ -95,24 +95,5 @@ keytool -genkeypair -alias lianwu-jwt -validity 3650 -keyalg RSA -dname "CN=jwt 
 
 keytool -list -rfc -keystore lianwu-jwt.jks -storepass lee111 | openssl x509 -inform pem -pubkey
 
-# 合并到master
-git checkout dev
-git pull origin dev
-git checkout release
-git pull origin release
-git checkout master
-git pull origin master
-git merge release
-git push origin master
-git checkout dev
-
-# 提交到dev和release
-git pull origin dev
-git add ./
-git commit -m path
-git push origin dev
-git checkout release
-git pull origin release
-git merge dev
-git push origin release
-git checkout dev
+# 将文件夹下的所有文件转为unix格式
+find . -type f -exec dos2unix {} \;

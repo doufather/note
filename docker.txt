@@ -1,5 +1,8 @@
 docker cp /etc/localtime [containerId]:/etc/localtime
 
+# 进入容器
+docker exec -it 8f /bin/bash  
+
 # mysql
 docker pull hub.c.163.com/library/mysql:5.7.18
 docker pull mysql:5.7.18
