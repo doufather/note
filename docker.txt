@@ -1,3 +1,7 @@
+# 构建容器
+docker build -t dunp:1 .
+
+# 复制文件进容器
 docker cp /etc/localtime [containerId]:/etc/localtime
 
 # 进入容器
