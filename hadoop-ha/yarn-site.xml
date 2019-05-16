@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+<!-- Site specific YARN configuration properties -->
+<configuration>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+    <description>YARN集群为MapReduce程序提供的shuffle服务</description>
+  </property>
+
+  <!--开启resourcemanagerHA，默认是false-->
+  <property>
+    <name>yarn.resourcemanager.ha.enabled</name>
+    <value>true</value>
+  </property>
+
+  <!--定义集群的ID。被选举器使用确保RM不会在其他集群中接管称为活跃RM-->
+  <property>
+    <name>yarn.resourcemanager.cluster-id</name>
+    <value>RMHA</value>
+  </property>
+
+  <!--配置resourcemanager的名字空间-->
+  <property>
+    <name>yarn.resourcemanager.ha.rm-ids</name>
+    <value>rm1,rm2</value>
+  </property>
+
+  <property>
+    <name>yarn.resourcemanager.hostname.rm1</name>
+    <value>master01</value>
+  </property>
+
+  <property>
+    <name>yarn.resourcemanager.hostname.rm2</name>
+    <value>master02</value>
+  </property>
+
+  <!--设置resourcemanager的zookeeper地址和端口-->
+  <property>
+    <name>yarn.resourcemanager.zk-address</name>
+    <value>slave01:2181,slave02:2181,slave03:2181</value>
+  </property>
+  
+</configuration>

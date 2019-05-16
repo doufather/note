@@ -41,10 +41,10 @@ http://master:8088  (yarn)
 
 
 # HA部署策略
-| 主机        | 安装软件      |
-| --------:   | -----:   |
-| master01        | $1      |
-| master02        | $1      |
-| slave01        | $1      |
-| slave02        | $1      |
-| slave03        | $1      |
+| 主机          | 安装软件      |
+| --------:     | -----:       |
+| master01      | hadoop      |
+| master02      | hadoop      |
+| slave01       | hadoop, zookeeper     |
+| slave02       | hadoop, zookeeper     |
+| slave03       | hadoop, zookeeper     |

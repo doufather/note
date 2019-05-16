@@ -15,26 +15,35 @@
 -->
 
 <!-- Put site-specific property overrides in this file. -->
-
 <configuration>
   <property>
-    <name>dfs.replication</name>
-    <value>1</value>
-    <description>副本数量</description>
+    <name>ha.zookeeper.quorum</name>
+    <value>slave01:2181,slave02:2181,slave03:2181</value>
+    <description>指定zookeeper节点</description>
   </property>
+
   <property>
-    <name>dfs.namenode.name.dir</name>
-    <value>/home/hadoop/data/hadoop/name</value>
-    <description>元数据目录</description>
+    <name>hadoop.tmp.dir</name>
+    <value>/opt/bigdata/data/hadoop/tmp</value>
+    <description>数据临时目录</description>
   </property>
+
   <property>
-    <name>dfs.datanode.data.dir</name>
-    <value>/home/hadoop/data/hadoop/data</value>
-    <description>datanode的数据目录</description>
+    <name>fs.defaultFS</name>
+    <value>hdfs://mycluster</value>
+    <description>主节点，并指定命名空间</description>
   </property>
+
   <property>
-    <name>dfs.secondary.http.address</name>
-    <value>slave1:50090</value>
-    <description>secondary的连接方式</description>
+    <name>ipc.client.connect.retry.interval</name>
+    <value>10000</value>
+    <description>ipc：进程间通信。指定进程之间通信失败后的重试时间</description>
   </property>
+
+  <property>
+    <name>ipc.client.connect.max.retries</name>
+    <value>100</value>
+    <description>设置ipc重试次数上限</description>
+  </property>
+
 </configuration>
