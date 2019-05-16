@@ -26,9 +26,9 @@ ssh-keygen -t rsa              # 会有提示，都按回车就可以
 ssh-copy-id hostname   # 将公钥发送到相应主机，实现免密登录
 ### 5) 安装jdk
 ### 6) 时间同步
-apt install ntp
+apt install ntpdate
 ntpdate ntp1.aliyun.com
-### 7) 安装hadoop,并配置相关文件(加hadoop文件夹)
+### 7) 安装hadoop,并配置相关文件(见hadoop文件夹)
 ### 8) 远程发送到其他主机
 ### 9) 执行格式化（主节点）
 hadoop namenode -format
