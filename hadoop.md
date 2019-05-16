@@ -1,9 +1,9 @@
 # 单机/伪分布式安装
-# 创建用户，并分配sudo权限
+## 创建用户，并分配sudo权限
 sudo useradd -m hadoop -s /bin/bash
 sudo passwd hadoop
 sudo adduser hadoop sudo
-# 免密登录
+## 免密登录
 cd ~/.ssh/                     # 若没有该目录，请先执行一次ssh localhost
 ssh-keygen -t rsa              # 会有提示，都按回车就可以
 cat ./id_rsa.pub >> ./authorized_keys  # 加入授权
@@ -11,7 +11,7 @@ cat ./id_rsa.pub >> ./authorized_keys  # 加入授权
 ssh-copy-id hostname   # 将公钥发送到相应主机，实现免密登录
 
 # 分布式安装
-# 安装步骤
+## 安装步骤
 
 ### 0) 创建hadoop用户
 sudo useradd -m hadoop -s /bin/bash
@@ -38,3 +38,13 @@ start-yarn.sh
 ### 11) 网页查看
 http://master:50070 (hdfs)
 http://master:8088  (yarn)
+
+
+# HA部署策略
+| 主机        | 安装软件      |
+| --------:   | -----:   |
+| master01        | $1      |
+| master02        | $1      |
+| slave01        | $1      |
+| slave02        | $1      |
+| slave03        | $1      |
