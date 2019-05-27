@@ -48,3 +48,8 @@ http://master:8088  (yarn)
 | slave01       | hadoop, zookeeper     |
 | slave02       | hadoop, zookeeper     |
 | slave03       | hadoop, zookeeper     |
+
+
+#QA
+### 1)ubuntu启动zookeeper报错，尝试下面命令
+ln -sf bash /bin/sh

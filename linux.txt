@@ -96,4 +96,5 @@ keytool -genkeypair -alias lianwu-jwt -validity 3650 -keyalg RSA -dname "CN=jwt 
 keytool -list -rfc -keystore lianwu-jwt.jks -storepass lee111 | openssl x509 -inform pem -pubkey
 
 # 将文件夹下的所有文件转为unix格式
+apt install dos2unix
 find . -type f -exec dos2unix {} \;
