@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<configuration>
+  <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>master01</value>
+    <description>设置resourcemanager运行节点</description>
+  </property>
+</configuration>

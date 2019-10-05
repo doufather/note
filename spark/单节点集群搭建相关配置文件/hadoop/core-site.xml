@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://master01:9000</value>
+        <description>主节点</description>
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/opt/app/hadoop/data/tmp</value>
+        <description>数据临时目录</description>
+    </property>
+
+</configuration>
