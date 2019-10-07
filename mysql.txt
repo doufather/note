@@ -11,7 +11,10 @@ docker run --name mysql57-slave1 -v /opt/docker_volumes/mysql57data/slave1:/var/
 # master.cnf
 [mysqld]
 server_id = 1
-log-bin= mysql-bin
+log-bin = mysql-bin
+expire_logs_days = 7
+binlog_format = mixed
+max_connections = 1500
 read-only=0
 
 !includedir /etc/mysql/conf.d/
