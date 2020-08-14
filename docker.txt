@@ -16,6 +16,13 @@ docker run --name mysql57 -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/
 # jenkins
 docker pull jenkins/jenkins:lts
 docker run -d --name jenkins -p 8099:8080 -p 50000:50000 -v /opt/docker_volumes/jenkins:/var/jenkins_home jenkins/jenkins:lts
+docker run -u root -itd --name jenkins -p 6001:8080 -v $(which docker):/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock -e TZ="Asia/Shanghai" -v /etc/localtime:/etc/localtime:ro -v /opt/volume/jenkins:/var/jenkins_home jenkins/jenkins
+
+
+# 解决jenkins下载插件慢的问题
+cd /var/lib/jenkins/updates/
+sed -i 's/http:\/\/www.google.com/https:\/\/www.baidu.com/g' default.json
+sed -i 's/http:\/\/updates.jenkins-ci.org\/download/https:\/\/mirrors.tuna.tsinghua.edu.cn\/jenkins/g' default.json
 
 # rabbitmq
 docker pull rabbitmq:management
