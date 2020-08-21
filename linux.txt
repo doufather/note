@@ -98,3 +98,7 @@ keytool -list -rfc -keystore lianwu-jwt.jks -storepass lee111 | openssl x509 -in
 # 将文件夹下的所有文件转为unix格式
 apt install dos2unix
 find . -type f -exec dos2unix {} \;
+
+# ubuntu server与debain对比
+u: ram: 150m	rom: 4.2G
+d: ram:	70m		rom: 1.0G
